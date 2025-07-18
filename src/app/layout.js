@@ -3,6 +3,7 @@ import "./globals.css";
 import { Poppins } from "next/font/google";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import Navbar from "@/components/navbar";
 
 const poppins = Poppins({
   subsets:['latin'],
@@ -24,6 +25,7 @@ export default function RootLayout({ children }) {
           <AppSidebar />
           <main className="w-full">
             <SidebarTrigger />
+            <Navbar />
             {children}
           </main>
         </SidebarProvider>

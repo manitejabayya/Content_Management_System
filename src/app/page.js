@@ -1,6 +1,8 @@
+import { Icons } from "@/components/Icons";
 import { Button } from "@/components/ui/button";
-import { Pencil } from "lucide-react";
+import { Layers, Pencil, Zap } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Landing() {
   return (
@@ -12,17 +14,43 @@ export default function Landing() {
             Streamline your content workflow,public with condfidently
           </p>
           <div className="flex gap-3">
-          <Button variant={"default"} className="bg-gray-200 mr-3">Try it Out!</Button>
-          <Button variant={"outline"}>Try it Out!</Button>
+          <Link href="/blogs" variant={"default"} className="bg-gray-200 hover:bg-gray-300 text-black px-4 py-1 rounded transition all duration-200 delay-100">Try it Out!</Link>
+          <Link href="/" variant={"outline"}>Learn More</Link>
           </div>
         </div>
       </section>
-      <section className="min-h-screen sm:min-h-[80vh] bg-gray-600/10">
-      <span className="max-w-1/3">
-        <Pencil size={50} />
+      <section className="min-h-screen sm:min-h-[80vh] bg-gray-600/10"> 
+      <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 flex justify-center items-center w-full h-screen px-4">
+      <span className="flex flex-col items-center gap-2">
+        <Pencil className="w-16 h-16 text-white" />
         <h3>Intutive Editor</h3>
-        <p>Create and edit content with user friendly interface</p>
+        <p className="text-gray-400">Create and edit content with user friendly interface</p>
       </span>
+      <span className="flex flex-col items-center gap-2">
+        <Layers size={50} />
+        <h3>Flexiable Tools</h3>
+        <p className="text-gray-400">Create and edit content with user friendly interface</p>
+      </span>
+      <span className="flex flex-col items-center gap-2">
+        <Zap size={50} />
+        <h3>Blazing fast</h3>
+        <p className="text-gray-400">Create and edit content with user friendly interface</p>
+      </span>
+      </div>
+      </section>
+      <section className="h-{60vh} sm:h-[50vh] w-full flex flex-col justify-center items-start">
+        <div className="max-w-[50%] mx-auto space-y-3">
+          <h4 className="font-bold text-2xl">
+          Ready to transform yout content Journey
+        </h4>
+        <p className="text-sm text-gray-400">
+          Join thousands of content creators like you who chose ManiCMS
+        </p>
+        <div className="flex gap-2">
+          <input className="bg-zinc-800 focus:outline-none rounded-md px-2 text-sm text-gray-400" type="text" placeholder="Enter your Email" />
+          <Button variant="outline">Submit</Button>
+        </div>
+        </div>
       </section>
     </main>
   );
