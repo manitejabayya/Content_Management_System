@@ -14,7 +14,7 @@ export default function Landing() {
             Streamline your content workflow,public with condfidently
           </p>
           <div className="flex gap-3">
-          <Link href="/blogs" variant={"default"} className="bg-gray-200 hover:bg-gray-300 text-black px-4 py-1 rounded transition all duration-200 delay-100">Try it Out!</Link>
+          <Link href="/sign-in" variant={"default"} className="bg-gray-200 hover:bg-gray-300 text-black px-4 py-1 rounded transition all duration-200 delay-100">Try it Out!</Link>
           <Link href="/" variant={"outline"}>Learn More</Link>
           </div>
         </div>
