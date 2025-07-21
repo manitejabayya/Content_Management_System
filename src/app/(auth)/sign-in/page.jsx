@@ -3,12 +3,12 @@
 import { Input } from '../../../components/ui/input';
 import { Button } from '../../../components/ui/button';
 import Link from 'next/link';
+import { signIn } from 'next-auth/react';
 
 export default function SignInPage() {
   // Dummy handler for Google sign-in
   const handleGoogleSignIn = () => {
-    // Add your Google sign-in logic here
-    alert('Continue with Google clicked');
+    signIn('google');
   };
 
   return (
