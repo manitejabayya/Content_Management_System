@@ -3,6 +3,7 @@ import GoogleProvider from "next-auth/providers/google"
 import { adapter } from "next/dist/server/web/adapter"
 import {prisma} from "@/lib/prisma";
 import { redirect } from "next/dist/server/api-utils";
+import { getServerSession } from "next-auth";
 
 export const authOptions = {
     adapter:PrismaAdapter(prisma),
@@ -23,7 +24,7 @@ export const authOptions = {
         async jwt({token,user}){
              
             if(user){
-                const dbUser = prisma.user.findUnique({
+                const dbUser = await prisma.user.findUnique({
                     where:{email:user.email},
                     select:{id:true,name:true,email:true,username:true,image:true,role:true},
 
@@ -69,4 +70,8 @@ export const authOptions = {
             return '/dashboard'
         }
     }
+
+
 }
+
+export const getAuthsession =()=> getServerSession(authOptions)

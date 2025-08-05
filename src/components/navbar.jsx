@@ -9,8 +9,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+import { getAuthsession } from "@/lib/auth";
+import SignOut from "./signout";
+
 export default function Navbar() {
-  const auth = false;
+  const session = getAuthsession();
   const tempuser={
     name:"Sam",
     username:'sam'
@@ -21,10 +24,10 @@ export default function Navbar() {
         <Anvil />
         <span className="font-extrabold">ManiCMS</span>
       </Link>
-      {auth ? (
+      {session ? (
         <Link href="/sign-in">Sign in</Link>
       ) : (
-        <UserModelComponent user={tempuser}/>
+        <UserModelComponent user={session?.user}/>
       )}
     </div>
   );
@@ -32,16 +35,16 @@ export default function Navbar() {
 
 const UserModelComponent =({user})=>{
   return <DropdownMenu>
-    <DropdownMenuTrigger>User</DropdownMenuTrigger>
+    <DropdownMenuTrigger><Image className="rounded-full border-2 border-[greenyellow]" src={user.image} width={40} height={40} /></DropdownMenuTrigger>
     <DropdownMenuContent>
     <DropdownMenuLabel>Hi,{user.name}</DropdownMenuLabel>
     <DropdownMenuSeparator />
     <DropdownMenuItem>
       <Link href={`profile/${user.username}`}>Go to profile</Link>
     </DropdownMenuItem>
-    <DropdownMenuItem>Billing</DropdownMenuItem>
-    <DropdownMenuItem>Team</DropdownMenuItem>
-    <DropdownMenuItem>Subscription</DropdownMenuItem>
+    <DropdownMenuItem>
+      <SignOut />
+    </DropdownMenuItem>
   </DropdownMenuContent>
 </DropdownMenu>
 }
