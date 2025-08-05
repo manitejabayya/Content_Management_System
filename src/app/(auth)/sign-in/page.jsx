@@ -4,11 +4,32 @@ import { Input } from '../../../components/ui/input';
 import { Button } from '../../../components/ui/button';
 import Link from 'next/link';
 import { signIn } from 'next-auth/react';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function SignInPage() {
+  const router = useRouter();
+  const [data, setData] = useState({ email: '', password: '' });
+  const [error, setError] = useState('');
+
   // Dummy handler for Google sign-in
   const handleGoogleSignIn = () => {
-    signIn('google');
+    signIn('google', { callbackUrl: '/dashboard' });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    const result = await signIn('credentials', {
+      ...data,
+      redirect: false,
+    });
+
+    if (result.error) {
+      setError('Invalid email or password');
+    } else {
+      router.push('/dashboard');
+    }
   };
 
   return (
@@ -18,9 +39,9 @@ export default function SignInPage() {
           <svg className="w-12 h-12 text-blue-500 mb-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 11c0-1.657-1.343-3-3-3s-3 1.343-3 3 1.343 3 3 3 3-1.343 3-3zm0 0c0-1.657 1.343-3 3-3s3 1.343 3 3-1.343 3-3 3-3-1.343-3-3zm0 0v2m0 4h.01" /></svg>
           <h1 className="text-3xl font-extrabold text-gray-800 dark:text-white">Sign In</h1>
         </div>
-        <form className="space-y-5">
-          <Input type="email" placeholder="Email" required className="focus:ring-2 focus:ring-blue-400" />
-          <Input type="password" placeholder="Password" required className="focus:ring-2 focus:ring-blue-400" />
+        <form className="space-y-5" onSubmit={handleSubmit}>
+          <Input type="email" placeholder="Email" required className="focus:ring-2 focus:ring-blue-400" value={data.email} onChange={(e) => setData({ ...data, email: e.target.value })} />
+          <Input type="password" placeholder="Password" required className="focus:ring-2 focus:ring-blue-400" value={data.password} onChange={(e) => setData({ ...data, password: e.target.value })} />
           <Button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg shadow transition-all">Sign In</Button>
         </form>
         <div className="my-6 flex items-center justify-center">

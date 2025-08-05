@@ -45,6 +45,7 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   username      String?   @unique @default(nanoid())
+  hashedPassword String?
   image         String?
   accounts      Account[]
   sessions      Session[]
@@ -52,13 +53,11 @@ model User {
   createdAt     DateTime @default(now())
 }
  
-model VerificationRequest{
+model VerificationToken {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   identifier String
-  token      String
+  token      String   @unique
   expires    DateTime
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
 
   @@unique([identifier, token])
 }
