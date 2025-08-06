@@ -50,6 +50,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   Posts         Post[]
+  role        Role     @default(USER)
   createdAt     DateTime @default(now())
 }
  
@@ -90,4 +91,9 @@ enum PostStatus {
   PUBLISHED
   DELETED
   ARCHIVED
+}
+
+enum Role {
+  USER
+  ADMIN
 }
