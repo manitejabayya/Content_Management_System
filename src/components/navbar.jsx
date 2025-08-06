@@ -11,7 +11,7 @@ import {
 
 import { getAuthsession } from "@/lib/auth";
 import SignOut from "./signout";
-import Image from "next/image";
+import UserAvatar from "./UserAvatar";
 
 export default async function Navbar() {
   const session = await getAuthsession();
@@ -35,13 +35,7 @@ const UserModelComponent = ({ user }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Image
-          className="rounded-full border-2 border-[greenyellow]"
-          src={user.image || '/default-avatar.png'} 
-          width={40}
-          height={40}
-          alt={user.name || 'User avatar'}
-        />
+        <UserAvatar user={user} />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>Hi, {user.name}</DropdownMenuLabel>
