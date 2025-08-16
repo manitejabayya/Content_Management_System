@@ -1,8 +1,9 @@
 "use client";
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Editor from "@/components/Editor";
 
-export default function Draft() {
+function DraftContent() {
     const searchParams = useSearchParams();
     const draftId = searchParams.get('id');
     
@@ -13,5 +14,13 @@ export default function Draft() {
             </h1>
             <Editor draftId={draftId} />
         </div>
+    );
+}
+
+export default function Draft() {
+    return (
+        <Suspense fallback={<div className="p-8 text-white">Loading...</div>}>
+            <DraftContent />
+        </Suspense>
     );
 }

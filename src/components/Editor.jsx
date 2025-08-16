@@ -8,6 +8,7 @@ import Image from '@tiptap/extension-image';
 import { List, Bold, Italic, Link as LinkIcon, Image as ImageIcon, Code, Heading1, Heading2, Heading3, Save, Eye, Loader2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import styles from './Editor.module.css';
 
 export default function Editor({ draftId = null }) {
   const { register, handleSubmit, setValue, watch } = useForm();
@@ -251,106 +252,10 @@ export default function Editor({ draftId = null }) {
         <div className="border border-zinc-600 border-t-0 rounded-b-sm min-h-[200px] bg-zinc-800">
           <EditorContent 
             editor={editor} 
-            className="editor-content"
+            className={styles.editorContent}
           />
         </div>
         
-        {/* Custom Editor Styles */}
-        <style jsx>{`
-          .editor-content {
-            color: white;
-          }
-          
-          .editor-content .ProseMirror {
-            padding: 1rem;
-            min-height: 200px;
-            outline: none;
-            color: white;
-            background: transparent;
-          }
-          
-          .editor-content .ProseMirror p {
-            margin: 0.5rem 0;
-            color: white;
-          }
-          
-          .editor-content .ProseMirror p.placeholder-text {
-            color: #9ca3af;
-            font-style: italic;
-          }
-          
-          .editor-content .ProseMirror h1 {
-            font-size: 2rem;
-            font-weight: bold;
-            margin: 1rem 0 0.5rem 0;
-            color: white;
-            line-height: 1.2;
-          }
-          
-          .editor-content .ProseMirror h2 {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin: 0.8rem 0 0.4rem 0;
-            color: white;
-            line-height: 1.3;
-          }
-          
-          .editor-content .ProseMirror h3 {
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin: 0.6rem 0 0.3rem 0;
-            color: white;
-            line-height: 1.4;
-          }
-          
-          .editor-content .ProseMirror ul {
-            padding-left: 1.5rem;
-            margin: 0.5rem 0;
-          }
-          
-          .editor-content .ProseMirror li {
-            margin: 0.25rem 0;
-            color: white;
-          }
-          
-          .editor-content .ProseMirror pre {
-            background: #374151;
-            border-radius: 0.375rem;
-            padding: 1rem;
-            margin: 0.5rem 0;
-            overflow-x: auto;
-          }
-          
-          .editor-content .ProseMirror code {
-            background: #374151;
-            padding: 0.125rem 0.25rem;
-            border-radius: 0.25rem;
-            font-family: 'Courier New', monospace;
-            color: #f3f4f6;
-          }
-          
-          .editor-content .ProseMirror a {
-            color: #60a5fa;
-            text-decoration: underline;
-          }
-          
-          .editor-content .ProseMirror img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 0.375rem;
-            margin: 0.5rem 0;
-          }
-          
-          .editor-content .ProseMirror strong {
-            font-weight: bold;
-            color: white;
-          }
-          
-          .editor-content .ProseMirror em {
-            font-style: italic;
-            color: white;
-          }
-        `}</style>
         
         {/* Category Selection */}
         <select
